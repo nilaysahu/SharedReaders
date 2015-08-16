@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SharedReader.iml" filepath="$PROJECT_DIR$/SharedReader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SharedReaderbackbone/SharedReaderbackbone.iml" filepath="$PROJECT_DIR$/SharedReaderbackbone/SharedReaderbackbone.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
