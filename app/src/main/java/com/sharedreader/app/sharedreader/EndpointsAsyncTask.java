@@ -16,12 +16,12 @@ import java.io.IOException;
 /**
  * Created by nisahu on 16/08/2015.
  */
-class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+class EndpointsAsyncTask extends AsyncTask<Pair<AsyncTaskCallBack, String>, Void, String> {
     private static MyApi myApiService = null;
-    private Context context;
+    private AsyncTaskCallBack context;
 
     @Override
-    protected String doInBackground(Pair<Context, String>... params) {
+    protected String doInBackground(Pair<AsyncTaskCallBack, String>... params) {
         if(myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -41,10 +41,11 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
         }
 
         context = params[0].first;
-        String name = params[0].second;
+        String query = params[0].second;
+
 
         try {
-            return myApiService.sayHi(name).execute().getData();
+            return myApiService.getBookListByQuery(query).execute().getData();
         } catch (IOException e) {
             return e.getMessage();
         }
@@ -52,6 +53,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        context.takeItBack(result);
     }
 }

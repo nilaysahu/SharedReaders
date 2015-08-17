@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -17,29 +18,26 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements AsyncTaskCallBack{
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
 
         final Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final TextView textViewToChange = (TextView) findViewById(R.id.textView);
-                textViewToChange.setText(
-                        "button clicked");
-                 CallRetrieveBook();
+                EditText searchTextBox = (EditText) findViewById(R.id.searchTextBox);
+                textViewToChange.setText("Fetching..");
+                CallRetrieveBook(searchTextBox.getText().toString());
             }
         });
     }
-    private void CallRetrieveBook()
-    {
-        String url = "https://www.goodreads.com/search.xml?key=JvO2RkMBST74HI7z0famA&q=Ender%27s+Game";
-        new RetrieveBook().execute(url);
+    private void CallRetrieveBook(String query) {
+        new EndpointsAsyncTask().execute(new Pair<AsyncTaskCallBack, String>(this, query));
     }
 
     @Override
@@ -62,6 +60,12 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void takeItBack(String result) {
+        final TextView textViewToChange = (TextView) findViewById(R.id.textView);
+        textViewToChange.setText(result);
     }
 
     class RetrieveBook extends AsyncTask<String, Void, String> {

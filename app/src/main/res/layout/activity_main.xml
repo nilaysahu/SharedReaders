@@ -16,7 +16,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/searchTextBox"
         android:layout_alignBottom="@+id/button"
         android:layout_toRightOf="@+id/button"
         android:layout_marginLeft="39dp"
@@ -29,7 +29,7 @@
         android:text="Medium Text"
         android:id="@+id/textView"
         android:layout_below="@+id/button"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText"
+        android:layout_alignRight="@+id/searchTextBox"
+        android:layout_alignEnd="@+id/searchTextBox"
         android:layout_marginTop="66dp" />
 </RelativeLayout>

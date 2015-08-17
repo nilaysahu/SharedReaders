@@ -38,7 +38,7 @@ public class MyEndpoint {
 
         return response;
     }
-    @ApiMethod(name="GetBookListByQuery")
+    @ApiMethod(name = "GetBookListByQuery")
     public MyBean GetBookListByQuery(@Named("name") String name)
     {
         MyBean response = new MyBean();
