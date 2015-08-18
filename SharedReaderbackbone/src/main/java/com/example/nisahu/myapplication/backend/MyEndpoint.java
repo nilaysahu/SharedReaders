@@ -39,11 +39,10 @@ public class MyEndpoint {
         return response;
     }
     @ApiMethod(name = "GetBookListByQuery")
-    public MyBean GetBookListByQuery(@Named("name") String name)
+    public MyBean GetBookListByQuery(@Named("name") String query)
     {
         MyBean response = new MyBean();
-        HttpRequestHandler request = new HttpRequestHandler();
-        response.setData(request.Perform(name));
+        response.setData(Slayer.GetBookByQuery(query));
         return response;
     }
 
